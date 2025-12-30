@@ -1,0 +1,8 @@
+{
+  "name": "react-native-utils",
+  "private": true,
+  "workspaces": [
+    "packages/*"
+  ],
+  "license": "MIT"
+}
