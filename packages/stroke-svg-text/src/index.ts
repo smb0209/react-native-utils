@@ -1,1 +1,4 @@
-export * from './StrokeSvgText';
+import {StrokeSvgText} from './StrokeSvgText';
+
+export default StrokeSvgText;
+export { StrokeSvgText };
