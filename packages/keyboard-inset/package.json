@@ -1,30 +1,30 @@
 {
-  "name" : "@minbong/keyboard-inset",
-  "version" : "0.1.2",
-  "description" : "React Native hooks for accurate keyboard insets, overlay registration, and stable cursor behavior (iOS & Android).",
-  "main" : "dist/index.js",
-  "types" : "dist/index.d.ts",
-  "exports" : {
-    "." : {
-      "types" : "./dist/index.d.ts",
-      "default" : "./dist/index.js"
+  "name": "@minbong/keyboard-inset",
+  "version": "0.1.2",
+  "description": "React Native hooks for accurate keyboard insets, overlay registration, and stable cursor behavior (iOS & Android).",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
     }
   },
-  "files" : [
+  "files": [
     "dist"
   ],
-  "scripts" : {
-    "build" : "tsc",
-    "prepublishOnly" : "npm run build"
+  "scripts": {
+    "build": "tsc",
+    "prepublishOnly": "npm run build"
   },
-  "peerDependencies" : {
-    "react" : ">=17",
-    "react-native" : ">=0.68"
+  "peerDependencies": {
+    "react": ">=17",
+    "react-native": ">=0.68"
   },
-  "license" : "MIT",
-  "devDependencies" : {
-    "@types/react" : "^18.2.0",
-    "@types/react-native" : "^0.72.8",
-    "typescript" : "^5.9.3"
+  "license": "MIT",
+  "devDependencies": {
+    "@types/react": "^18.2.0",
+    "@types/react-native": "^0.72.8",
+    "typescript": "^5.9.3"
   }
 }
