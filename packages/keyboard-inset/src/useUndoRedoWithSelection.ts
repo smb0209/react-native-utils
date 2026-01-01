@@ -1,6 +1,6 @@
-import { useEffect, useRef } from 'react';
-import { Platform } from 'react-native';
-import { useUndoRedo } from './useUndoRedo';
+import {useEffect, useRef} from 'react';
+import {Platform} from 'react-native';
+import {useUndoRedo} from './useUndoRedo';
 
 export type Selection = {
   start: number;
@@ -12,19 +12,19 @@ type TextSnapshot = {
   selection: Selection;
 };
 
-export function useUndoRedoWithSelection ({
-                                            initialValue,
-                                            inputRef,
-                                          }: {
+export function useUndoRedoWithSelection({
+                                           initialValue,
+                                           inputRef,
+                                         }: {
   initialValue: string;
   inputRef?: React.RefObject<any>;
 }) {
-  const lastSelectionRef = useRef<Selection> ({
+  const lastSelectionRef = useRef<Selection>({
     start: initialValue.length,
     end: initialValue.length,
   });
 
-  const undoCore = useUndoRedo<TextSnapshot> ({
+  const undoCore = useUndoRedo<TextSnapshot>({
     text: initialValue,
     selection: {
       start: initialValue.length,
@@ -56,6 +56,7 @@ export function useUndoRedoWithSelection ({
    * ✅ commit 시점에 selection을 "확정"해서 만든다
    */
   const commitHistory = (text: string) => {
+    if (isHistoryNavigationRef.current) return;
     undoCore.set({
       text,
       selection: lastSelectionRef.current,
@@ -65,11 +66,11 @@ export function useUndoRedoWithSelection ({
   /**
    * ✅ undo / redo 이후 커서 복원
    */
-  useEffect (() => {
+  useEffect(() => {
     if (!isHistoryNavigationRef.current) return;
-    if ( !inputRef?.current) return;
+    if (!inputRef?.current) return;
 
-    requestAnimationFrame (() => {
+    requestAnimationFrame(() => {
       let selectionToRestore = undoCore.state.selection;
       const textLength = undoCore.state.text.length;
       if (Platform.OS === 'ios' && selectionToRestore.start < textLength) {
@@ -78,7 +79,7 @@ export function useUndoRedoWithSelection ({
           end: selectionToRestore.end + 1,
         };
       }
-      inputRef.current.setNativeProps?. ({
+      inputRef.current.setNativeProps?.({
         selection: selectionToRestore,
       });
       isHistoryNavigationRef.current = false;
@@ -94,9 +95,9 @@ export function useUndoRedoWithSelection ({
     canRedo: undoCore.canRedo,
     registerSelection,
     resetHistory: (text: string) =>
-      undoCore.reset ({
+      undoCore.reset({
         text,
-        selection: { start: text.length, end: text.length },
+        selection: {start: text.length, end: text.length},
       }),
   };
 }
