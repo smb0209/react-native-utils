@@ -15,9 +15,11 @@ type TextSnapshot = {
 export function useUndoRedoWithSelection({
                                            initialValue,
                                            inputRef,
+                                           multiline = false,
                                          }: {
   initialValue: string;
   inputRef?: React.RefObject<any>;
+  multiline?: boolean;
 }) {
   const lastSelectionRef = useRef<Selection>({
     start: initialValue.length,
@@ -68,23 +70,37 @@ export function useUndoRedoWithSelection({
    */
   useEffect(() => {
     if (!isHistoryNavigationRef.current) return;
-    if (!inputRef?.current) return;
+
+    // 🚫 iOS + multiline: do NOT control selection (UITextView limitation)
+    if (Platform.OS === 'ios' && multiline) {
+      isHistoryNavigationRef.current = false;
+      return;
+    }
+
+    if (!inputRef?.current) {
+      isHistoryNavigationRef.current = false;
+      return;
+    }
 
     requestAnimationFrame(() => {
       let selectionToRestore = undoCore.state.selection;
       const textLength = undoCore.state.text.length;
+
+      // iOS single-line off-by-one correction
       if (Platform.OS === 'ios' && selectionToRestore.start < textLength) {
         selectionToRestore = {
           start: selectionToRestore.start + 1,
           end: selectionToRestore.end + 1,
         };
       }
+
       inputRef.current.setNativeProps?.({
         selection: selectionToRestore,
       });
+
       isHistoryNavigationRef.current = false;
     });
-  }, [undoCore.state, inputRef]);
+  }, [undoCore.state, inputRef, multiline]);
 
   return {
     currentText: undoCore.state.text,

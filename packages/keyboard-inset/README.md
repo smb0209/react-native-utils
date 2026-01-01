@@ -18,6 +18,7 @@ This library solves common but tricky issues such as:
 - 🍎 iOS cursor offset fixes
 - 🤖 Android keyboard behavior normalization
 - ⚙️ Fully typed (TypeScript)
+- 🚫 Automatic selection restore disabled on iOS for multiline TextInput (by design)
 
 ---
 
@@ -93,6 +94,7 @@ const {
 } = useUndoRedoWithSelection({
   initialValue: '',
   inputRef,
+  multiline: true,
 });
 ```
 
@@ -113,11 +115,20 @@ const {
 
 ---
 
-## ⚠️ iOS Notes
+## ⚠️ iOS Multiline Limitation
 
-On iOS, `TextInput` selection can be off by one after undo/redo operations.
-This library applies a platform-specific correction **only during history navigation**.
-Normal typing and mid-text edits are never interfered with.
+On iOS, `TextInput` with `multiline={true}` is backed by `UITextView`.
+Due to native UIKit behavior, controlling both `value` and cursor
+(`selection`) simultaneously is unreliable during undo/redo operations.
+
+To ensure stable undo/redo behavior, this library **intentionally disables
+cursor (selection) restoration on iOS when `multiline` is enabled**.
+
+- Undo / Redo restores text value only
+- Cursor position is managed by iOS
+- Normal typing and mid-text edits are never interfered with
+
+This behavior is automatic and does not affect Android or single-line inputs.
 
 ---
 

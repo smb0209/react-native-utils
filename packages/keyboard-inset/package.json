@@ -1,6 +1,6 @@
 {
   "name": "@minbong/keyboard-inset",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "description": "React Native hooks for accurate keyboard insets, overlay registration, and stable cursor behavior (iOS & Android).",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
