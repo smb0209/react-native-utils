@@ -1,0 +1,13 @@
+import {
+  AMPLITUDE_API_KEY,
+  ENABLE_ATT,
+  GOOGLE_ADMOB_IOS_REWARDED_UNIT_ID,
+  GOOGLE_ADMOB_ANDROID_REWARDED_UNIT_ID,
+} from '@env';
+
+export const ENV = {
+  amplitudeKey: AMPLITUDE_API_KEY,
+  googleAdmobIosRewardedUnitId: GOOGLE_ADMOB_IOS_REWARDED_UNIT_ID,
+  googleAdmobAndroidRewardedUnitId: GOOGLE_ADMOB_ANDROID_REWARDED_UNIT_ID,
+  enableATT: ENABLE_ATT,
+};

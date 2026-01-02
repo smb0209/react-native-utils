@@ -1,0 +1,10 @@
+{
+  "name": "YourApp",
+  "displayName": "YourApp",
+  "react-native-google-mobile-ads": {
+    "android_app_id": "your-app-id",
+    "ios_app_id": "your-app-id",
+    "user_tracking_usage_description": "This identifier will be used to deliver personalized ads to you.",
+    "sk_ad_network_items": []
+  }
+}
