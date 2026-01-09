@@ -6,6 +6,7 @@
   ],
   "license": "MIT",
   "dependencies": {
+    "papaparse": "^5.5.3",
     "quill": "^2.0.3",
     "react-native-orientation-locker": "^1.7.0"
   }
